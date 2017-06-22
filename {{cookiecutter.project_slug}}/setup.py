@@ -5,7 +5,7 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
+with open('README') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
@@ -13,8 +13,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     {%- if cookiecutter.command_line_interface|lower == 'click' %}
-    'Click>=6.0',
+    'Click',
     {%- endif %}
+    'six',
     # TODO: put package requirements here
 ]
 
@@ -29,6 +30,7 @@ test_requirements = [
 {%- if cookiecutter.use_pytest == 'y' %}
     'pytest',
 {%- endif %}
+    'mock',
     # TODO: put package test requirements here
 ]
 
@@ -71,12 +73,9 @@ setup(
 {%- endif %}
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
     tests_require=test_requirements,
