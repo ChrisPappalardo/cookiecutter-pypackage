@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  data_test: {}
+
+services:
+  {{ cookiecutter.project_slug }}:
+    build:
+      context: .
+      dockerfile: ./compose/{{ cookiecutter.project_slug }}/Dockerfile-test
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    image: {{ cookiecutter.project_slug }}:test
+    volumes:
+      - .:/app
+      - data_test:/data

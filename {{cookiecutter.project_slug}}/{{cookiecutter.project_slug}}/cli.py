@@ -1,4 +1,11 @@
-"""Console script for {{cookiecutter.project_slug}}."""
+# -*- coding: utf-8 -*-
+
+'''
+cli
+---
+
+console script for {{cookiecutter.project_slug}}.
+'''
 
 {%- if cookiecutter.command_line_interface|lower == 'argparse' %}
 import argparse
@@ -11,25 +18,28 @@ import click
 {% if cookiecutter.command_line_interface|lower == 'click' %}
 @click.command()
 def main(args=None):
-    """Console script for {{cookiecutter.project_slug}}."""
-    click.echo("Replace this message by putting your code into "
-               "{{cookiecutter.project_slug}}.cli.main")
-    click.echo("See click documentation at https://click.palletsprojects.com/")
+    '''
+    {{cookiecutter.project_slug}} command line interface
+    '''
+
+    click.echo("update {{cookiecutter.project_slug}}.cli.main")
     return 0
 {%- endif %}
 {%- if cookiecutter.command_line_interface|lower == 'argparse' %}
 def main():
-    """Console script for {{cookiecutter.project_slug}}."""
+    '''
+    {{cookiecutter.project_slug}} command line interface.
+    '''
+
     parser = argparse.ArgumentParser()
     parser.add_argument('_', nargs='*')
     args = parser.parse_args()
 
-    print("Arguments: " + str(args._))
-    print("Replace this message by putting your code into "
-          "{{cookiecutter.project_slug}}.cli.main")
+    print('Arguments: ' + str(args._))
+    print('Replace this message by putting your code into '
+          '{{cookiecutter.project_slug}}.cli.main')
     return 0
 {%- endif %}
-
 
 if __name__ == "__main__":
     sys.exit(main())  # pragma: no cover
