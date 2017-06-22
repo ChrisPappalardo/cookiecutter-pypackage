@@ -55,6 +55,10 @@ Generate a Python package project::
 
     cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
 
+Or use a paticular branch (e.g. the cpappala branch of this fork)::
+
+    cookiecutter https://github.com/ChrisPappalardo/cookiecutter-pypackage.git --checkout cpappala
+
 Then:
 
 * Create a repo and put it there.
