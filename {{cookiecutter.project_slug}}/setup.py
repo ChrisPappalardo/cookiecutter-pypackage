@@ -13,7 +13,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     {%- if cookiecutter.command_line_interface|lower == 'click' %}
-    'Click',
+    'click',
     {%- endif %}
     'six',
     # TODO: put package requirements here
@@ -54,7 +54,7 @@ setup(
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main'
+            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:entry_point'
         ]
     },
     {%- endif %}

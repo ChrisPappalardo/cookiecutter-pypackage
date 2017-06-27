@@ -21,5 +21,13 @@ def main(args=None):
     click.echo("update {{cookiecutter.project_slug}}.cli.main")
 
 
+def entry_point():
+    '''
+    required to make setuptools and click play nicely (context object)
+    '''
+
+    return main()  # add obj={} to create in context
+
+
 if __name__ == "__main__":
-    main()
+    entry_point()
