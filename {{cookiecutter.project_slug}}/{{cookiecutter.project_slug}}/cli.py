@@ -41,5 +41,13 @@ def main():
     return 0
 {%- endif %}
 
+def entry_point():
+    '''
+    required to make setuptools and click play nicely (context object)
+    '''
+
+    return main()  # add obj={} to create in context
+
+
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    entry_point()
