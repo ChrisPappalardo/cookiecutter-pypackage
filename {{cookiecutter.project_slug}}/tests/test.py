@@ -73,6 +73,6 @@ class Test{{ cookiecutter.project_slug|title }}(unittest.TestCase):
         self.assertEqual(result.exit_code, 0)
         result = self.runner.invoke(cli.main, ['--help'])
         self.assertEqual(result.exit_code, 0)
-        self.assertTrue('--help  Show this message' in result.output)
+        self.assertTrue('Show this message and exit.' in result.output)
 {%- endif %}
 {%- endif %}
