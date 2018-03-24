@@ -1,18 +1,34 @@
 # -*- coding: utf-8 -*-
 
-"""Console script for {{cookiecutter.project_slug}}."""
-import sys
+'''
+cli
+---
+
+console script for {{cookiecutter.project_slug}}.
+'''
+
+
 import click
+import sys
 
 
 @click.command()
 def main(args=None):
-    """Console script for {{cookiecutter.project_slug}}."""
-    click.echo("Replace this message by putting your code into "
-               "{{cookiecutter.project_slug}}.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
+    '''
+    {{cookiecutter.project_slug}} command line interface
+    '''
+
+    click.echo("update {{cookiecutter.project_slug}}.cli.main")
     return 0
 
 
+def entry_point():
+    '''
+    required to make setuptools and click play nicely (context object)
+    '''
+
+    return sys.exit(main())  # add obj={} to create in context
+
+
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    entry_point()

@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `{{ cookiecutter.project_slug }}` package."""
+'''
+test
+----
+
+unit tests for {{ cookiecutter.project_slug }} package
+'''
+
 
 {% if cookiecutter.use_pytest == 'y' -%}
 import pytest
@@ -51,26 +57,22 @@ def test_command_line_interface():
 
 
 class Test{{ cookiecutter.project_slug|title }}(unittest.TestCase):
-    """Tests for `{{ cookiecutter.project_slug }}` package."""
 
     def setUp(self):
-        """Set up test fixtures, if any."""
+        self.runner = CliRunner()
 
     def tearDown(self):
-        """Tear down test fixtures, if any."""
+        pass
 
     def test_000_something(self):
-        """Test something."""
+        self.assertTrue(True)
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
 
     def test_command_line_interface(self):
-        """Test the CLI."""
-        runner = CliRunner()
-        result = runner.invoke(cli.main)
-        assert result.exit_code == 0
-        assert '{{ cookiecutter.project_slug }}.cli.main' in result.output
-        help_result = runner.invoke(cli.main, ['--help'])
-        assert help_result.exit_code == 0
-        assert '--help  Show this message and exit.' in help_result.output
+        result = self.runner.invoke(cli.main)
+        self.assertEqual(result.exit_code, 0)
+        result = self.runner.invoke(cli.main, ['--help'])
+        self.assertEqual(result.exit_code, 0)
+        self.assertTrue('Show this message and exit.' in result.output)
 {%- endif %}
 {%- endif %}

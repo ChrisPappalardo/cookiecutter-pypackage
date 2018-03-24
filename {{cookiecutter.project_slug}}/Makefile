@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build clean-docker docs help
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -29,7 +29,7 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+clean: clean-build clean-pyc clean-test clean-docker
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -48,6 +48,10 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
+
+clean-docker: ## remove docker images and containers
+	-docker ps --all --quiet | xargs docker rm --force 2>/dev/null || true
+	-docker images --quiet | xargs docker rmi --force 2>/dev/null || true
 
 lint: ## check style with flake8
 	flake8 {{ cookiecutter.project_slug }} tests
