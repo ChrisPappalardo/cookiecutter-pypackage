@@ -48,6 +48,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
+	rm -fr .pytest_cache
 
 clean-docker: ## remove docker images and containers
 	-docker ps --all --quiet | xargs docker rm --force 2>/dev/null || true
@@ -87,7 +88,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
-release: clean ## package and upload a release
+release: dist ## package and upload a release
 	twine upload dist/*
 
 dist: clean ## builds source and wheel package
