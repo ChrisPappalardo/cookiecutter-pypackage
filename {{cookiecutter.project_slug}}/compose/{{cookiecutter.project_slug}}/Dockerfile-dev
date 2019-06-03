@@ -8,7 +8,8 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils \
     && apt-get install -y curl git less man nano sudo wget \
-    && apt-get install -y build-essential
+    && apt-get install -y build-essential \
+    && apt-get install -y libssl-dev libffi-dev python-dev python3-dev
 
 # configure apt-utils (fixes warnings)
 RUN dpkg-reconfigure apt-utils

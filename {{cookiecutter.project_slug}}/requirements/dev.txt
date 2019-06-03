@@ -1,10 +1,16 @@
 # import base requirements
 -r base.txt
 
+{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
+# pypi deployment with travis requirements
+cryptography>=2.7
+PyYAML>=5.1
+{% endif %}
 # additional dev requirements
-bumpversion==0.5.3
-wheel==0.29.0
-watchdog==0.8.3
-flake8==2.6.0
-coverage==4.1
-Sphinx==1.4.8
+bumpversion>=0.5.3
+coverage>=4.5.3
+flake8>=3.7.7
+mock>=2.0.0
+Sphinx>=2.1.0
+wheel>=0.33.4
+watchdog>=0.9.0
