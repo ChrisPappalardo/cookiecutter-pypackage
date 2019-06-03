@@ -11,7 +11,10 @@ services:
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
+    #env-file:
+    #  - ./.envs/.production/.{{ cookiecutter.project_slug }}
     image: {{ cookiecutter.project_slug }}
     volumes:
       - .:/app
       - data:/data
+    #command: /start

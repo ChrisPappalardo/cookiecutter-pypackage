@@ -1,5 +1,4 @@
-
-FROM debian:latest
+FROM python:3
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
@@ -9,9 +8,7 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils \
     && apt-get install -y curl git less man nano sudo wget \
-    && apt-get install -y build-essential \
-    && apt-get install -y python python-dev python3 python3-dev \
-    && apt-get install -y libssl-dev libffi-dev
+    && apt-get install -y build-essential
 
 # configure apt-utils (fixes warnings)
 RUN dpkg-reconfigure apt-utils
@@ -20,18 +17,39 @@ RUN dpkg-reconfigure apt-utils
 RUN echo "alias ls='ls --color'" >> /etc/bash.bashrc
 RUN echo "alias grep='grep --color=auto'" >> /etc/bash.bashrc
 
-# download get-pip and install for python 2.x and 3.x
+# download get-pip and install
 RUN wget -P /tmp https://bootstrap.pypa.io/get-pip.py
 RUN python /tmp/get-pip.py
-RUN python3 /tmp/get-pip.py
 
-# install ipython for python 2.x and 3.x
-RUN python -m pip install ipython
-RUN python3 -m pip install ipython
+# install ipython
+RUN pip install ipython
 
-# install requirements for python 2.x and 3.x
-COPY ./requirements /requirements
-RUN python -m pip install -r /requirements/base.txt
-RUN python3 -m pip install -r /requirements/base.txt
+# copy code
+COPY . /app
 
 WORKDIR /app
+
+# install dev requirements
+COPY ./requirements /requirements
+RUN pip install -r /requirements/dev.txt
+
+# copy entrypoint and make executable
+COPY ./compose/{{cookiecutter.project_slug}}/entrypoint /entrypoint
+RUN sed -i 's/\r//' /entrypoint
+RUN chmod +x /entrypoint
+
+# copy start script and make executable
+COPY ./compose/{{cookiecutter.project_slug}}/start /start
+RUN sed -i 's/\r//' /start
+RUN chmod +x /start
+
+# set user/group to app/app
+RUN addgroup --system app \
+    && adduser --system --ingroup app app
+
+# set app permissions
+RUN chown -R app /app
+
+USER app
+
+ENTRYPOINT ["/entrypoint"]
