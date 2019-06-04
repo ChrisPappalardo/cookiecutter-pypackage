@@ -27,3 +27,5 @@ WORKDIR /app
 # install test requirements
 COPY ./requirements /requirements
 RUN python -m pip install -r /requirements/test.txt
+
+ENTRYPOINT ["/entrypoint"]

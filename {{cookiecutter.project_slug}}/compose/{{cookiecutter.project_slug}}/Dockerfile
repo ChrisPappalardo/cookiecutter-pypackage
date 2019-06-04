@@ -29,9 +29,9 @@ COPY . /app
 
 WORKDIR /app
 
-# install dev requirements
+# install base requirements
 COPY ./requirements /requirements
-RUN pip install -r /requirements/dev.txt
+RUN pip install -r /requirements/base.txt
 
 # copy entrypoint and make executable
 COPY ./compose/{{cookiecutter.project_slug}}/entrypoint /entrypoint
