@@ -19,13 +19,11 @@ RUN echo "alias grep='grep --color=auto'" >> /etc/bash.bashrc
 RUN wget -P /tmp https://bootstrap.pypa.io/get-pip.py
 RUN python /tmp/get-pip.py
 
-# copy code
-COPY . /app
-
 WORKDIR /app
 
 # install test requirements
 COPY ./requirements /requirements
 RUN python -m pip install -r /requirements/test.txt
 
-ENTRYPOINT ["/entrypoint"]
+# copy package
+COPY . /app

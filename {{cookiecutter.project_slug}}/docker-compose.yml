@@ -15,6 +15,5 @@ services:
     #  - ./.envs/.production/.{{ cookiecutter.project_slug }}
     image: {{ cookiecutter.project_slug }}
     volumes:
-      - .:/app
       - data:/data
     #command: /start

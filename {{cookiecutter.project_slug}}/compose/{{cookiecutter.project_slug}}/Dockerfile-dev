@@ -25,9 +25,6 @@ RUN python /tmp/get-pip.py
 # install ipython
 RUN pip install ipython
 
-# copy code
-COPY . /app
-
 WORKDIR /app
 
 # install dev requirements
@@ -35,13 +32,17 @@ COPY ./requirements /requirements
 RUN pip install -r /requirements/dev.txt
 
 # copy entrypoint and make executable
-COPY ./compose/{{cookiecutter.project_slug}}/entrypoint /entrypoint
-RUN sed -i 's/\r//' /entrypoint
-RUN chmod +x /entrypoint
+COPY ./compose/{{cookiecutter.project_slug}}/entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # copy start script and make executable
-COPY ./compose/{{cookiecutter.project_slug}}/start /start
-RUN sed -i 's/\r//' /start
-RUN chmod +x /start
+COPY ./compose/{{cookiecutter.project_slug}}/start.sh /start.sh
+RUN sed -i 's/\r//' /start.sh
+RUN chmod +x /start.sh
 
-ENTRYPOINT ["/entrypoint"]
+# copy and install package
+COPY . /app
+RUN pip install /app
+
+ENTRYPOINT ["/entrypoint.sh"]

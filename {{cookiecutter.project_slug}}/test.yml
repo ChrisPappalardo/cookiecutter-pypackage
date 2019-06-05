@@ -13,5 +13,4 @@ services:
       - LANG=C.UTF-8
     image: {{ cookiecutter.project_slug }}:test
     volumes:
-      - .:/app
       - data_test:/data

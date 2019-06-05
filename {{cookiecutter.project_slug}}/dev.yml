@@ -11,6 +11,7 @@ services:
     environment:
       - LC_ALL=C.UTF-8
       - LANG=C.UTF-8
+      - ENVTYPE=dev
     #env-file:
     #  - ./.envs/.dev/.{{ cookiecutter.project_slug }}
     image: {{ cookiecutter.project_slug }}:dev

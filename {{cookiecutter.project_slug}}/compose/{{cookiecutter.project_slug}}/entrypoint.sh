@@ -4,10 +4,17 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+if [ "${ENVTYPE:-}" == "dev" ]; then
+
+    echo "detected ${ENVTYPE} environment..."
+    pip install -e .
+
+fi
+
 # custom exports go here
 # ----------------------
 
-#if [ -z "${SOMEVAR}" ]; then
+#if [ -z "${SOMEVAR:-}" ]; then
 #    export SOMEVAR="FOO"
 #fi
 
