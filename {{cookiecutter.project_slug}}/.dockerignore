@@ -1,1 +1,5 @@
-# put local data directories and files here
+.*
+!.coveragerc
+!.env*
+!.pylintrc
+!.travis.yml
