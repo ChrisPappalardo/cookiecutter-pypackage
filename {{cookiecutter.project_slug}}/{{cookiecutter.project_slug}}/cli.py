@@ -7,7 +7,7 @@ cli
 console script for {{cookiecutter.project_slug}}.
 '''
 
-{%- if cookiecutter.command_line_interface|lower == 'argparse' %}
+{% if cookiecutter.command_line_interface|lower == 'argparse' %}
 import argparse
 {%- endif %}
 import sys
@@ -46,7 +46,7 @@ def entry_point():
     required to make setuptools and click play nicely (context object)
     '''
 
-    return main()  # add obj={} to create in context
+    return sys.exit(main())  # add obj={} to create in context
 
 
 if __name__ == "__main__":
